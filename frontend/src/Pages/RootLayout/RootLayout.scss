@@ -1,0 +1,83 @@
+@import '../../styles/var.scss';
+
+.rootLayout{
+    display:flex;
+    width:100vw;
+    height:100vh;
+    position:relative;
+    background-color: $backgroundLight;
+
+    // .modal{
+    //     position:absolute;
+    //     background-color: rgba(0, 0, 0, 0.342);
+    //     height:100vh;
+    //     width:100vw;
+    //     top:0;
+    //     left:0;
+    //     z-index:+1;
+    // }
+
+    .left{
+        flex:2.5;
+        // background-color: aquamarine;
+        display: flex;
+        flex-direction: column;
+        font-size: $s2;
+        align-items: center;
+        border:1px solid black;
+        // justify-content: center;
+        
+        .logo{
+            @include center;
+            font-size:$s8;
+            font-weight: $w6;
+            flex-direction: column;
+            margin-top:5rem;
+            margin-bottom:10rem;
+        }
+        .menuLabel{
+            width: 100%;
+            padding-left: 6rem;
+            font-size: $s1;
+            margin-bottom: 2rem;
+            color:$gray1;
+            font-weight: $w6;
+            
+        }
+        .menu{
+            display: flex;
+            // justify-content: center;
+            flex-direction: column;
+            gap:2rem;
+            list-style: none;
+            width: 100%;
+
+            .menuItem{
+                display: flex;
+                gap:4rem;
+                padding-left:6rem;
+                color:$gray2;
+                font-size: $s2;
+                // align-items: baseline;
+                // justify-content: space-between;
+
+                .menuItemIcon{
+                    @include center;
+                    .icon{
+                        font-size: $s5;
+                        color:$gray1;
+                    }
+                }
+                
+                
+                
+            }
+        }
+    }
+    .right{
+        flex:9;
+        padding:3rem;
+        // background-color: bisque;
+    }
+
+}

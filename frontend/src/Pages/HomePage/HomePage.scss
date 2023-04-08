@@ -1,0 +1,44 @@
+.home{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    height:100%;
+
+    .heading{
+        font-size: 2.4rem;;
+    }
+}
+.homeSection{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    
+    box-shadow:inset;
+    flex:1;
+    border-radius: 2rem;
+   flex-direction: column;
+   gap:2rem;
+//    padding: 0 2rem;
+
+    
+   .sectionContent{
+    height: 100%;
+    border: 1px solid black;
+    border-radius:2rem;
+   }
+}
+
+.complaintsSection{
+    padding-top:2rem;
+    border: 1px solid black;
+
+    .sectionLabel{
+        padding-left:2rem;
+    }
+
+    .sectionContent{
+        border:none;
+    }
+}
+

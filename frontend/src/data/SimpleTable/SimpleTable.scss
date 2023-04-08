@@ -1,0 +1,30 @@
+.table{
+
+    .productCell{
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+        .image{
+            height: 2rem;
+            width:2rem;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right : 1rem;
+        }
+    }
+    .status{
+        font-weight: 500;
+    }
+    .Pending{
+        color:rgb(115, 96, 1);
+        padding:0.3rem;
+        border-radius:0.3rem;
+        background-color: rgba(219, 219, 25, 0.3);
+    }
+    .Approved{
+        color:green;
+        padding:0.3rem;
+        border-radius:0.3rem;
+        background-color: rgba(110, 237, 182, 0.3);
+    }
+}

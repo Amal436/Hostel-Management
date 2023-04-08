@@ -1,0 +1,117 @@
+$backgroundWhite:#ffff;
+$backgroundLight:#F8FFFF;
+
+$primary1:#A7DBD5;
+$primary2:#32E0C4;
+$primary3:#0D7377;
+$primary4:#212121;
+
+$gray1:#B2B1B1;
+$gray2:656464;
+
+$innerShadow:rgba(#12221D,0.25);
+
+//buttonColors:
+$buttonPrimary:rgba(#32E0C4,0.4);
+$buttonAlert:rgba(#FC0000,0.3);
+$buttonPurple:rgba(#000AFC,0.3);
+
+$filterColor:#E5FEFF;
+
+
+
+
+
+//Font
+$fontPrimary:'Montserrat', sans-serif;
+$fontHeading:'Outfit', sans-serif;
+
+//font sizes
+$s1:1.2rem;
+$s2:1.4rem;
+$s3:1.6rem;
+$s4:1.8rem;
+$s5:2rem;
+$s6:2.2rem;
+$s7:2.4rem;
+$s8:2.6rem;
+$s9:2.8rem;
+$s10:3rem;
+
+//Font Weights
+$w1:100;
+$w2:200;
+$w3:300;
+$w4:400;
+$w5:500;
+$w6:600;
+$w7:700;
+$w8:800;
+$w9:900;
+
+//buttonColors:
+$buttonPrimary:rgba(#32E0C4,0.4);
+$buttonAlert:rgba(#FC0000,0.3);
+$buttonPurple:rgba(#000AFC,0.3);
+
+//borderRadius
+$borderRadius1 : 1rem;
+$borderRadius2: 2rem;
+
+
+
+
+//Mixins
+
+@mixin center{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+@mixin divBorder{
+        border:solid black 1px;
+        border-radius:2rem;
+}
+
+@mixin displayImage{
+    width:100%;
+    height:auto;
+}
+
+@mixin solidButton{   
+
+        font-family: $fontPrimary;
+        font-size:$s3;
+        padding:0.5rem 1.5rem;
+        width:fit-content;
+        background-color: $primaryColor;
+        color:$backgroundColor;
+        border-radius:0.5rem;
+        border: 0.2rem solid $primaryColor;
+        font-family: $fontPrimary;
+        font-weight: $w6;
+}
+
+
+
+@media only screen and (max-width:1200px)
+{
+    html{
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width:1024px)
+{
+    html{
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width:768px)
+{
+    html{
+        font-size: 12px;
+    }
+}
+

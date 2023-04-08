@@ -1,0 +1,23 @@
+@import '../../styles/var.scss';
+
+.dropdownList{
+    @include center;
+    position:absolute;
+    list-style: none;
+    border:1px solid black;
+    justify-content: center;
+    gap:0.5rem;
+    border-radius: 1rem;
+    background-color: white;
+    flex-direction: column;
+    
+    
+    .listItem{
+        background-color: antiquewhite;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+}

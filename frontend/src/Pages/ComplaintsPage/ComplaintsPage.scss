@@ -1,0 +1,142 @@
+@import '../../styles/var.scss';
+.complaintsPage{
+    @include center;
+    flex-direction: column;
+    // height:100vh;
+    height:fit-content;
+    padding:0 4rem 2rem 2rem  ;
+    gap:2rem;
+
+    .icon{
+        @include center;
+        margin-left:1rem;
+    }
+
+    .top{
+        flex:1;
+        width:100%;
+        @include divBorder;
+        display: flex;
+        gap:6rem;
+        
+        .heading{
+            font-size: $s8;
+            font-weight: $w4;
+            color:$primary4;
+        }
+
+        .inputSearchBox{
+            width:60%;;
+            height:4rem;
+            border:1.5px solid $primary4;
+            border-radius: $borderRadius1;
+            padding:1rem 4rem;
+            font-size: $s3;
+            font-weight: $w6;
+        }
+
+        .inputSearchBox::placeholder{
+            color:$gray1;
+        }
+            
+        }
+
+    
+    .middle{
+        // flex:2;
+        width:100%;
+        @include divBorder;
+        @include center;
+        flex-direction: column;
+        gap:2rem;
+        
+        &Row1{
+            flex:1;
+            width:100%;
+            font-size: $s2;
+            font-weight: $w6;
+            color:$primary4;
+        }
+
+        &Row2{
+            flex:2;
+            width: 100%;
+            display: flex;
+            gap:2rem;
+
+            .filter{
+                @include center;
+                font-size: $s2;
+                background-color: $backgroundLight;
+                width:10rem;
+                height:3rem;
+                border:1.5px solid $primary4;
+                border-radius:$borderRadius1;
+    
+                
+
+            }    
+        }
+
+        &Row3{
+            flex:2;
+            width:100%;
+            display: flex;
+            justify-content: space-between;
+    
+
+            .timeDuration{
+                display: flex;
+                align-items: center;
+                justify-content: right;
+                font-size:$s4;
+                font-weight: $w6;
+                color:$gray1;
+                // margin-right:4rem;
+
+            }
+
+            .appliedFilters{
+                @include center;
+                gap:2rem;
+                transform: translateX(-20rem);
+
+                .appliedFilter{
+
+                    padding:0.5rem 1rem;
+                   
+                    border-radius: $borderRadius1;
+                    border:solid 1px $primary4;
+                    @include center;
+                    font-size:$s2;
+                }
+            }
+            
+            .actionButtons{
+             @include center;
+             display: flex;
+
+             .btn{
+                height:4rem;
+                width:12rem;
+                border-radius:$borderRadius1;
+                border:solid 1px $primary4;
+                @include center;
+             }
+            
+            }
+    
+        }
+    }
+
+   
+
+
+    .bottom{
+        // flex:8;
+        width:100%;
+        @include divBorder;
+        font-size:2rem;
+
+    }
+}
