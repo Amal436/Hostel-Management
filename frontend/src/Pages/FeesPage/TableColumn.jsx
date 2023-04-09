@@ -48,7 +48,7 @@ let columns = [
     width:200,
     renderCell:()=>{
         return <div className="cellAction">
-            <Link className='link' to='/complaints/:complaintId'>
+            <Link className='link' to='/fees/:studentId'>
             <div className="viewButton"> View  </div>
             </Link>
             {/* <div className="deleteButton">Delete</div> */}

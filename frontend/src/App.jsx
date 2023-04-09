@@ -5,7 +5,6 @@ import HomePage from "./Pages/HomePage/HomePage";
 import ComplaintsPage from "./Pages/ComplaintsPage/ComplaintsPage";
 import SingleComplaint from './Pages/SingleComplaintPage/SingleComplaint';
 
-
 const router = createBrowserRouter([
   {
     path: '/', element: <RootLayout />, errorElement: <div>Something went wrong</div>, children: [

@@ -7,6 +7,37 @@
     padding:0 4rem 2rem 2rem  ;
     gap:2rem;
 
+    .demand{
+        transform : translateX(5rem)
+    }
+
+    .notification{
+        height:1.5rem;
+        width:1.5rem;
+        @include center;
+        background-color: red;
+        position:absolute;
+        border-radius:50%;
+        right:7rem;
+        color:white;
+        font-weight:$w6;
+    }
+
+    .request{
+        @include center;
+        width:4rem;
+        height: 4rem;
+        // transform:translateX(3rem)
+    }
+
+    .btn{
+        height:4rem;
+        width:12rem;
+        border-radius:$borderRadius1;
+        border:solid 1px $primary4;
+        @include center;
+     }
+
     .icon{
         @include center;
         margin-left:1rem;
@@ -33,6 +64,7 @@
             padding:1rem 4rem;
             font-size: $s3;
             font-weight: $w6;
+            margin-right:4rem;
         }
 
         .inputSearchBox::placeholder{
@@ -92,7 +124,7 @@
                 font-size:$s4;
                 font-weight: $w6;
                 color:$gray1;
-                // margin-right:4rem;
+                margin-right:6rem;
 
             }
 
@@ -115,6 +147,7 @@
             .actionButtons{
              @include center;
              display: flex;
+             gap:2rem;
 
              .btn{
                 height:4rem;

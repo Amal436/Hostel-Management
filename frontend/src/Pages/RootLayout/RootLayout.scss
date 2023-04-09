@@ -1,11 +1,21 @@
 @import '../../styles/var.scss';
 
+.link{
+    text-decoration: none;
+    color:$primary4;
+}
+
+.hover{
+    color:$primary2;
+}
+
 .rootLayout{
     display:flex;
     width:100vw;
     height:100vh;
     position:relative;
     background-color: $backgroundLight;
+    position:absolute;
 
     // .modal{
     //     position:absolute;
@@ -35,6 +45,9 @@
             margin-top:5rem;
             margin-bottom:10rem;
         }
+        .logo:hover{
+            color:$primary4;
+        }
         .menuLabel{
             width: 100%;
             padding-left: 6rem;
@@ -58,8 +71,6 @@
                 padding-left:6rem;
                 color:$gray2;
                 font-size: $s2;
-                // align-items: baseline;
-                // justify-content: space-between;
 
                 .menuItemIcon{
                     @include center;
@@ -67,7 +78,14 @@
                         font-size: $s5;
                         color:$gray1;
                     }
+
+                    .link:hover{
+                        background-color:$primary2;
+                        color:$primary2;
+                    }
                 }
+
+                
                 
                 
                 
