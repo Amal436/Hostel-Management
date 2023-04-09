@@ -69,42 +69,61 @@ exports.addFine = catchAsyncError(async (req, res, next) => {
 
     const { batch, fine, last_date, alert_frequency } = req.body;
 
-    const currentDate = Date.now();
+    const currentDate = new Date(Date.now()).getTime();
 
-    const queryStr = `UPDATE fees_demand
-                      SET fine = fine + ${fine}
-                      FROM student
-                      WHERE fees_demand.student_id = student.student_id
-                      AND fees_demand.status = 'pending'
-                      AND fees_demand.semester = student.semester
-                      AND student.student_id/100000 = 2020
-                      AND to_timestamp(fees_demand.last_date, 'YYYY-MM-DD') < to_timestamp(${currentDate} / 1000.0)
-                      `
-
-    client.query(queryStr, (err, result) => {
-        if (err){
-            return next(new ErrorHandler("Something went wrong while adding fine",500));
+    const queryStr1 = `SELECT last_date FROM fees_demand inner join student on 
+                                        fees_demand.student_id = student.student_id
+                                    And fees_demand.status = 'pending'
+                                    And fees_demand.semester = student.semester
+                                    And student.student_id/100000= ${batch}`;
+    client.query(queryStr1, (err, result) => {
+        if (err) {
+            console.log(err);
+            return next(new ErrorHandler("some error occured", 500));
         }
-        else {
+
+        const old_date = new Date(result.rows[0].last_date).getTime();
+
+        if (old_date >= currentDate) {
+            return next(new ErrorHandler("Deadline is not reached", 400));
+        }
+
+        const queryStr = `UPDATE fees_demand
+                          SET fine = fine + ${fine},
+                          last_date='${last_date}',
+                          alert_frequency=${alert_frequency}
+                          FROM student
+                          WHERE fees_demand.student_id = student.student_id
+                          AND fees_demand.status = 'pending'
+                          AND fees_demand.semester = student.semester
+                          AND student.student_id/100000 = ${batch}
+                          `
+
+        client.query(queryStr, (err, result2) => {
+            if (err) {
+                return next(new ErrorHandler("Something went wrong while adding fine", 500));
+            }
+
             res.status(200).json({
                 success: true,
             })
-        }
+        })
+
     })
 })
 
 // fees details for each student of all semesters
 
-exports.getStudentFeeDetailsBySemester = catchAsyncError(async(req,res,next)=>{
-    const {student_id} = req.body;
+exports.getStudentFeeDetailsBySemester = catchAsyncError(async (req, res, next) => {
+    const { student_id } = req.body;
     const queryStr = `SELECT * FROM fees_demand WHERE student_id = ${student_id}`;
-    client.query(queryStr,(err,result)=>{
-        if(err){
-            return next(new ErrorHandler("Something went wrong while fetching the data",505));
-        }else{
+    client.query(queryStr, (err, result) => {
+        if (err) {
+            return next(new ErrorHandler("Something went wrong while fetching the data", 505));
+        } else {
             res.status(200).json({
-                success:true,
-                Result:result.rows
+                success: true,
+                Result: result.rows
             })
         }
     })

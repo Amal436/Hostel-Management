@@ -1,7 +1,10 @@
 const csv = require('csv-parser');
 const stream = require('stream');
 const client = require('../db/database');
-exports.registerStudent = (req, res, next) => {
+const catchAsyncError = require('../middleware/catchAsyncError');
+const ErrorHandler = require('../utils/ErrorHandler');
+
+exports.registerStudent = catchAsyncError(async (req, res, next) => {
     if (!req.file) {
         res.status(400).send('No file uploaded.');
         return;
@@ -16,19 +19,19 @@ exports.registerStudent = (req, res, next) => {
         .on('data', (data) => results.push(data))
         .on('end', () => {
             // do something with the parsed CSV data
-            for(let i=0;i<results.length;i++){
-                const {student_id,name,semester,phone_no,email,flat_id,parent_phone} = results[i];
-                const queryStr = `INSERT INTO student VALUES ('${student_id}','${name}','${semester}','${phone_no}','${email}','${flat_id}','${parent_phone}')`;
-                client.query(queryStr,(err,res)=>{
-                    if(err){
-                        return;
+            let count = results.length;
+            for (let i = 0; i < results.length; i++) {
+                const { student_id, name, semester, phone, email, flat_id, parent_phone } = results[i];
+                const queryStr = `INSERT INTO student VALUES ('${student_id}','${name}','${semester}','${phone}','${email}','${flat_id}','${parent_phone}')`;
+                client.query(queryStr, (err, res) => {
+                    if (!err) {
+                        console.log('data inserted successfully');
                     }
-                    console.log('data inserted successfully');
                 })
             }
             res.status(200).json({
                 success: true,
-                message: 'file uploaded successfully'
+                message: 'Unique ids added successfully'
             })
         });
-}
+})
