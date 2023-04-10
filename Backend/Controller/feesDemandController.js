@@ -1,6 +1,5 @@
 const client = require("../db/database");
 const catchAsyncError = require("../middleware/catchAsyncError");
-const error = require("../middleware/error");
 const ErrorHandler = require("../utils/ErrorHandler");
 
 // Creating Demand for all the students of a batch
@@ -116,7 +115,9 @@ exports.addFine = catchAsyncError(async (req, res, next) => {
 
 exports.getStudentFeeDetailsBySemester = catchAsyncError(async (req, res, next) => {
     const { student_id } = req.body;
-    const queryStr = `SELECT * FROM fees_demand WHERE student_id = ${student_id}`;
+    const queryStr = `SELECT fees_demand.*, student.phone, student.email, student.parent_phone,student.flat_id
+                      FROM fees_demand
+                      JOIN student ON fees_demand.student_id = student.student_id and fees_demand.student_id = ${student_id}`;
     client.query(queryStr, (err, result) => {
         if (err) {
             return next(new ErrorHandler("Something went wrong while fetching the data", 505));
