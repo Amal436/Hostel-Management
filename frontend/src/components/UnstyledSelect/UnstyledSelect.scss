@@ -1,0 +1,14 @@
+@import '../../styles/var.scss';
+.input{
+    width:100%;
+    height:4rem;
+    border:none !important;
+    background-color: #eee;
+    padding:1rem 2rem;
+    font-size:$s4;
+    font-weight: $w4;
+    border-radius:1rem;
+    outline:none;
+    color:black;
+   }
+

@@ -1,18 +1,8 @@
 @import '../../styles/var.scss';
-.status{
 
-}
-.status{
-    // border:1px solid black;
-    // color:black;
-}
-.pending{
+.resolved{
     background-color: rgba(184, 235, 184,0.5);
     color:green;
-}
-.resolved{
-    background-color: rgba(238, 133, 133,0.5);
-    color:rgb(146, 4, 4);
 }
 .cellAction{
     display:flex;

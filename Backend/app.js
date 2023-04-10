@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
 const ErrorHandler = require('./middleware/error');
+const cors = require('cors');
 //middleware
 
 app.use(express.json());
+app.use(cors());
 
 // import routes
 const studentRoute = require('./Routes/studentRoutes');

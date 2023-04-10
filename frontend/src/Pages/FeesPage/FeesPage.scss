@@ -4,7 +4,7 @@
     flex-direction: column;
     // height:100vh;
     height:fit-content;
-    padding:0 4rem 2rem 2rem  ;
+    padding:0 2rem 2rem 2rem  ;
     gap:2rem;
 
     .demand{
@@ -46,7 +46,6 @@
     .top{
         flex:1;
         width:100%;
-        @include divBorder;
         display: flex;
         gap:6rem;
         
@@ -70,6 +69,10 @@
         .inputSearchBox::placeholder{
             color:$gray1;
         }
+
+        .primary{
+            background-color: $buttonPrimary;
+         }
             
         }
 
@@ -77,7 +80,6 @@
     .middle{
         // flex:2;
         width:100%;
-        @include divBorder;
         @include center;
         flex-direction: column;
         gap:2rem;
@@ -131,14 +133,13 @@
             .appliedFilters{
                 @include center;
                 gap:2rem;
-                transform: translateX(-20rem);
+                // transform: translateX(-20rem);
 
                 .appliedFilter{
 
                     padding:0.5rem 1rem;
-                   
+                   background-color: $filterColor;
                     border-radius: $borderRadius1;
-                    border:solid 1px $primary4;
                     @include center;
                     font-size:$s2;
                 }
@@ -153,8 +154,19 @@
                 height:4rem;
                 width:12rem;
                 border-radius:$borderRadius1;
-                border:solid 1px $primary4;
+                // border:solid 1px $primary4;
+                cursor: pointer;
                 @include center;
+             }
+
+             
+
+             .purple{
+                background-color: $buttonPurple;
+             }
+
+             .alert{
+                background-color: $buttonAlert;
              }
             
             }
@@ -166,10 +178,9 @@
 
 
     .bottom{
-        // flex:8;
         width:100%;
-        @include divBorder;
         font-size:2rem;
+        box-shadow: 2px 4px 10px 1px rgba(201 , 201, 201, 0.47) ;
 
     }
 }

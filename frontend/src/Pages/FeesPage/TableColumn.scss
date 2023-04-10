@@ -7,12 +7,13 @@
     // color:black;
 }
 .pending{
-    background-color: rgba(184, 235, 184,0.5);
-    color:green;
+    background-color: rgba(255, 217, 0, 0.379) !important;
+    color:rgb(113, 81, 0) !important;
 }
 .resolved{
-    background-color: rgba(238, 133, 133,0.5);
-    color:rgb(146, 4, 4);
+    background-color: rgba(0, 224, 183, 0.419);
+    color:rgb(1, 61, 47);
+    font-weight: $w6 !important;
 }
 .cellAction{
     display:flex;

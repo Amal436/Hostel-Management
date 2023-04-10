@@ -15,7 +15,7 @@
     .top{
         flex:1;
         width:100%;
-        @include divBorder;
+        // @include divBorder;
         display: flex;
         gap:6rem;
         
@@ -45,7 +45,7 @@
     .middle{
         // flex:2;
         width:100%;
-        @include divBorder;
+        // @include divBorder;
         @include center;
         flex-direction: column;
         gap:2rem;
@@ -82,7 +82,8 @@
             flex:2;
             width:100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: start;
+            position: relative;
     
 
             .timeDuration{
@@ -99,14 +100,13 @@
             .appliedFilters{
                 @include center;
                 gap:2rem;
-                transform: translateX(-20rem);
+                // transform: translateX(-20rem);
 
                 .appliedFilter{
 
                     padding:0.5rem 1rem;
-                   
                     border-radius: $borderRadius1;
-                    border:solid 1px $primary4;
+                    background-color: $filterColor;
                     @include center;
                     font-size:$s2;
                 }
@@ -115,12 +115,15 @@
             .actionButtons{
              @include center;
              display: flex;
+             position:absolute;
+             right:0;
+             bottom:0;
 
              .btn{
                 height:4rem;
                 width:12rem;
                 border-radius:$borderRadius1;
-                border:solid 1px $primary4;
+                cursor: pointer;
                 @include center;
              }
             
@@ -133,10 +136,9 @@
 
 
     .bottom{
-        // flex:8;
         width:100%;
-        @include divBorder;
         font-size:2rem;
+        box-shadow: 2px 4px 10px 1px rgba(201 , 201, 201, 0.47) ;
 
     }
 }

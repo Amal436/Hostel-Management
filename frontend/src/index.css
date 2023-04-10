@@ -9,6 +9,9 @@ html{
     /* background-color: #F8FFFF; */
     
 }
+body{
+    overflow: scroll;
+}
 body::-webkit-scrollbar {
     display: none;
   }

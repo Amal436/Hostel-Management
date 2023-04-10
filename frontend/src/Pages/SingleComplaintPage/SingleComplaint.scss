@@ -8,10 +8,9 @@
     justify-content:start;
 
     .top{
-        height:10%;
+        height:6%;
         display: flex;
         align-items: center;
-        @include divBorder;
         width: 100%;
         font-size:$s7;
         font-weight: $w5;;
@@ -20,13 +19,11 @@
 
     .middle{
         height:35%;
-        @include divBorder;
         width:100%;
-        padding:2rem;
+        padding:0rem 0rem 2rem;
     }
     .bottom{
-        height:40%;
-        @include divBorder;
+        height:35%;
         width: 100%;
         display: flex;
         gap:8rem;

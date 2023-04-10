@@ -1,24 +1,26 @@
 @import '../../styles/var.scss';
 .userDetailCard{
-    height:70%;
+    height:100%;
     width:100%;
     display: flex;
     padding:2rem;
     background-color: white;
-    border: 1px solid black;
     border-radius:2rem;
+    box-shadow: inset 2px 4px 12px rgba(18, 34, 29, 0.25);
+border-radius: 20px;
 
     .left{
         border:none !important;
         flex:4;
         display: flex;
         flex-direction: column;
-        gap:2rem;
+        gap:0rem;
 
         .title{
             width:100%;
-            font-size:$s5;
+            font-size:$s5 !important;
             font-weight: $w3;
+            margin-bottom: 1rem !important;
         }
 
         .details{
@@ -63,7 +65,8 @@
             padding:0;
 
             .tag{
-                border: 1px solid black;
+                // border: 1px solid black;
+                background-color: $buttonPrimary;
                 @include center;
                 width:100%;
                 height:3rem;

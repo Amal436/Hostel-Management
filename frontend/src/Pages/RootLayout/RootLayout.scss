@@ -8,8 +8,13 @@
 .hover{
     color:$primary2;
 }
+.rootLayout::-webkit-scrollbar {
+    display: none;
+  }
 
 .rootLayout{
+    position:fixed;
+    overflow: scroll;
     display:flex;
     width:100vw;
     height:100vh;
@@ -34,7 +39,7 @@
         flex-direction: column;
         font-size: $s2;
         align-items: center;
-        border:1px solid black;
+        // border:1px solid black;
         // justify-content: center;
         
         .logo{

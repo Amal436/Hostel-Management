@@ -1,41 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './ModalForm.scss';
 import useInput from '../../hooks/useInput';
+import { useSelector , useDispatch } from 'react-redux';
+import { modalAction } from '../../store/modalSlice';
+import DemandFeesForm from '../DemandFeesForm/DemandFeesForm';
+import AddFineForm from '../AddFineForm/AddFineForm';
+
 
 const ModalForm = () => {
 
-    const childClickHandler = (e) => {
-        console.log('Child clicked');
-        e.stopPropagation();
+   const dispatch = useDispatch();
+   const {visible , form} = useSelector((state)=>{return state.modal});
+   console.log(form+" is the opened form");
 
-    }
+   const closeFeesDemandModal = (event)=>{
+
+    event.preventDefault();
+    dispatch(modalAction.hide());
+   }
+
+    const modalClasses = visible?'modalForm visible' : 'modalForm';
+    
+
     return (
-        <div className='modalForm' onClick={() => { console.log('parent clicked !') }}>
-
-            <form action="" className="form" onClick={childClickHandler}>
-
-                <div className="row1">
-                    <input type="text" className="batch input" />
-                    <span className="semester">5</span>
-                </div>
-                <div className="control">
-                    <label htmlFor="amount">Enter Amount : </label>
-                    <input type="text" id='amount' className="amount input" />
-                </div>
-
-                <div className="control">
-                    <label htmlFor="date">Last Date : </label>
-                    <input type='date' className="lastDate input" />
-
-                </div>
-
-                
-
-                <button className="demand btn-grad input">Demand Fees</button>
-
-
-
-            </form>
+        <div className={modalClasses} onClick={closeFeesDemandModal}>
+           {form==='fees_demand_form' &&  <DemandFeesForm></DemandFeesForm>} 
+           {form==='add_fine_form' && <AddFineForm/>} 
         </div>
     )
 }

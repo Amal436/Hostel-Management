@@ -1,0 +1,157 @@
+@import '../../styles/var.scss';
+.visible{
+    z-index:+5;
+}
+.addFineForm{
+    padding:2rem 4rem;
+    background-color: white;
+    width:60rem;
+    height:40rem;
+    border-radius: $borderRadius1;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+    @include center;
+    flex-direction: column;
+    gap:2rem;
+
+    .row1{
+        flex:1;
+        width:100%;
+        display: flex;
+        gap:1rem;
+    }
+
+    .batch{
+        width:80%;
+        height:4rem;
+        border:2px solid black;
+        border-radius:1rem;
+        padding:0 2rem;
+        font-size:2rem;
+        text-align: center;
+        font-weight: $w6;
+    }
+    .semester{
+        width:20%;
+        border:2px solid black;
+        border-radius:1rem;
+        @include center;
+        font-size:$s5;
+        height:4rem;
+        position:relative;
+        top:1.8rem;
+
+    }
+
+    .row2{
+        flex:1;
+        display: flex;
+        gap:2rem;
+
+    }
+    
+    .control{
+        width:100%;
+        flex:1;
+
+        label{
+            color:$gray2;
+            font-size :1.5rem;
+            font-weight: $w7;
+            margin-bottom: 0.5rem;
+        }
+
+       .input{
+        width:100%;
+        height:4rem;
+        // border:2px solid $primary4;
+        padding:1rem 2rem;
+        font-size:$s5;
+        font-weight: $w6;
+        border-radius:1rem;
+        text-align: center;
+       }
+       .amount{
+        
+        @include center;
+        font-size:$s9;
+        text-align: center;
+    }
+    }
+
+    .demand{
+        width:100%;
+        height:5rem;
+        cursor:pointer;
+      }
+
+      .btn-grad {
+        background-image: linear-gradient(to right, #005C97 0%, #363795  51%, #005C97  100%);
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+        border:none;
+      }
+
+      .btn-grad:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+     
+        color:white;
+        border-radius: 1rem;
+        border-color: blueviolet;
+        
+    }
+
+    .action{
+        display: flex;
+        width:100%;
+        gap:2rem;
+        
+    }
+
+             
+    .cancel-btn-grad {
+        border: none;
+        background-image: linear-gradient(to right, #ff4b1f 0%, #ff9068  51%, #ff4b1f  100%);
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+      }
+
+      .cancel-btn-grad:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+     
+
+    
+}
+
+.selectList{
+    width:100%;
+    height:4rem;
+    .select{
+        width:100%;
+        text-align: center;
+        font-size:$s4;
+        height:4rem;
+        outline:none;
+        border:none;
+    }
+    .select:focus{
+        border:none;
+        outline:$primary2;
+    }
+}
