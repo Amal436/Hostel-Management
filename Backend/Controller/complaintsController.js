@@ -67,3 +67,74 @@ exports.getSingleComplaint = catchAsyncError(async (req, res, next) => {
 
     })
 })
+
+// Resolve complaint -->student.
+
+exports.resolveComplaint = catchAsyncError(async (req, res, next) => {
+    const resolved_date = new Date(Date.now()).toISOString().slice(0, 10);
+    const resolved_time = new Date().toLocaleTimeString();
+    const { id } = req.body;
+    const queryStr = `update complaint set status = 'resolved',resolved_date = '${resolved_date}',resolved_time = '${resolved_time}' where id = ${id}`;
+    client.query(queryStr, (err, result) => {
+        if (err) return next(new ErrorHandler("something went wrong while updating complaint", 400));
+        if (result.rowCount === 0) return next(new ErrorHandler("complaint not found with this id", 404));
+        res.status(200).json({
+            success: true,
+        })
+    })
+})
+
+// Count complaints by their type and status
+
+exports.countComplaints = catchAsyncError(async (req, res, next) => {
+    const queryStr = `SELECT type, status, COUNT(*) as count
+                      FROM complaint
+                      GROUP BY type, status;`
+    client.query(queryStr, (err, result) => {
+        if (err) return next(new ErrorHandler("something went wrong while counting the complaints", 400));
+
+        let cnt_ep = 0, cnt_er = 0, cnt_pp = 0, cnt_pr = 0, cnt_hp = 0, cnt_hr = 0, cnt_cp = 0, cnt_cr = 0;
+        for (let i = 0; i < result.rows.length; i++) {
+            const { type, status, count } = result.rows[i];
+            if (type === 'electrical') {
+                if (status === 'pending') cnt_ep = Number(count);
+                else cnt_er = Number(count);
+            }
+            else if (type === 'plumbing') {
+                if (status === 'pending') cnt_pp = Number(count);
+                else cnt_pr = Number(count);
+            }
+            else if (type === 'house_keeping') {
+                if (status === 'pending') cnt_hp = Number(count);
+                else cnt_hr = Number(count);
+            }
+            else if (type === 'carpenter') {
+                if (status === 'pending') cnt_cp = Number(count);
+                else cnt_cr = Number(count);
+            }
+        }
+        const Result = {
+            electrical: {
+                pending: cnt_ep,
+                resolved: cnt_er
+            },
+            plumbing: {
+                pending: cnt_pp,
+                resolved: cnt_pr
+            },
+            house_keeping: {
+                pending: cnt_hp,
+                resolved: cnt_hr
+            },
+            carpenter: {
+                pending: cnt_cp,
+                resolved: cnt_cr
+            }
+        }
+        res.status(200).json({
+            success: true,
+            Result
+        })
+    })
+})
+

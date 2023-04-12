@@ -48,7 +48,7 @@ exports.getStudentsByBatch = catchAsyncError(async (req, res, next) => {
     const { batch } = req.body;
     const queryStr = `SELECT student_id,name,SUM(raw_amount+fine) AS total_pending_amount,status,payment_date,payment_mode,transaction_id
                       FROM fees_demand
-                      WHERE status = 'pending' and student_id/100000=${batch}
+                      WHERE student_id/100000=${batch}
                       GROUP BY student_id,name,status,payment_date,payment_mode,transaction_id`;
     client.query(queryStr, (err, result) => {
         if (err)
@@ -127,5 +127,27 @@ exports.getStudentFeeDetailsBySemester = catchAsyncError(async (req, res, next) 
                 Result: result.rows
             })
         }
+    })
+})
+
+// Resolve fees status if someone has paid the fees.
+
+exports.updateFeesStatus = catchAsyncError(async (req, res, next) => {
+    const { student_id, transaction_id, payment_mode } = req.body;
+    if(!student_id || !transaction_id || !payment_mode){
+        return next(new ErrorHandler("All the fields are required",500));
+    }
+    const payment_date = new Date(Date.now()).toISOString().slice(0, 10);
+    const payment_time = new Date().toLocaleTimeString();
+    const queryStr = `update fees_demand set status = 'paid', raw_amount = 0, fine = 0,payment_date = '${payment_date}', payment_time = '${payment_time}',transaction_id = '${transaction_id}',payment_mode = '${payment_mode}' where student_id = ${student_id}`;
+
+    client.query(queryStr, (err, result) => {
+
+        if (err) return next(new ErrorHandler("Something went wrong while payment", 500));
+        if (result.rowCount === 0) return next(new ErrorHandler("Student not found with this id", 404));
+
+        res.status(201).json({
+            success: true,
+        })
     })
 })
