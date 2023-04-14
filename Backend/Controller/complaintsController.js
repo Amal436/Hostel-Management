@@ -29,6 +29,9 @@ exports.createComplaint = catchAsyncError(async (req, res, next) => {
 // get all complaint after a date
 
 exports.getAllComplaints = catchAsyncError(async (req, res, next) => {
+    if(!req.body.date){
+        return next(new ErrorHandler("parameter is not named correctly",400));
+    }
     const { date } = req.body;
     const queryStr = `select complaint.id,complaint.type,complaint.status, student.name as raised_by, worker.name as assignee,student.flat_id
     from complaint

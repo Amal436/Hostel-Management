@@ -6,8 +6,8 @@ import ComplaintsPage from "./Pages/ComplaintsPage/ComplaintsPage";
 import SingleComplaint from './Pages/SingleComplaintPage/SingleComplaint';
 
 
-import { FeesDataLoader } from './Pages/FeesPage/FeesPage';
 import { SingleFeesLoader } from './Pages/singleFeesPage/SingleFeesPage';
+import { SingleComplaintLoader } from './Pages/SingleComplaintPage/SingleComplaint';
 import SingleFees from './Pages/singleFeesPage/SingleFeesPage';
 
 const router = createBrowserRouter([
@@ -17,12 +17,12 @@ const router = createBrowserRouter([
       { path: '/', element: <HomePage />, },
 
       { path: '/complaints' ,children:[
-        { path:'/complaints' , element:<ComplaintsPage/>},
-        { path : ':complaintId' , element:<SingleComplaint/>},
+        { path:'/complaints' , element:<ComplaintsPage/> },
+        { path : ':complaintId' , element:<SingleComplaint/>, loader:SingleComplaintLoader},
       ] },
       
       { path: '/fees',  children:[
-        { path:'',element: <FeesPage />  , loader:FeesDataLoader},
+        { path:'',element: <FeesPage />},
         {path:':studentId' , element:<SingleFees/>,  loader:SingleFeesLoader}
       ]},
 

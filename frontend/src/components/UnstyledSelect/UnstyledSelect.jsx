@@ -163,9 +163,15 @@ CustomSelect.propTypes = {
   }),
 };
 
-export default function UnstyledSelect({options}) {
+export default function UnstyledSelect({options , onChange , defaultValue , name , value}) {
   return (
-    <CustomSelect defaultValue={options[0].value}>
+    <CustomSelect 
+    defaultValue={defaultValue} 
+    onChange={(event , newValue)=>{onChange(event , newValue , name)}}
+    name={'some name'}
+    value={value}
+    style={value && {backgroundColor:"#A7DBD5" , fontWeight:"500"}}
+    >
       {options.map((option)=>{
         return <StyledOption  value={option.value}>{option.name}</StyledOption>
       })}

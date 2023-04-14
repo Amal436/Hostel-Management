@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = {visible : false , form :''};
+const initialState = {visible : false , form :'' , data : null};
 
 const modalSlice = createSlice({
     name : 'modal',
@@ -7,7 +7,8 @@ const modalSlice = createSlice({
     reducers : {
         show(state , action){
             state.visible = true;
-            state.form = action.payload;
+            state.form = action.payload.form;
+            state.data = action.payload.data
         },
         
         hide(state){

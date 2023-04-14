@@ -67,15 +67,18 @@
             .filter{
                 @include center;
                 font-size: $s2;
+                font-weight:$w6;
                 background-color: $backgroundLight;
-                width:10rem;
+                width:20rem;
                 height:3rem;
-                border:1.5px solid $primary4;
+                // border:1.5px solid $primary4;
                 border-radius:$borderRadius1;
-    
-                
 
-            }    
+            }
+            
+            .filter3{
+                width:20rem;
+            }
         }
 
         &Row3{

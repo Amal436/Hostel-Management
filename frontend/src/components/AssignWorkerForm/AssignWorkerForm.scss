@@ -49,6 +49,18 @@
         border:1px dotted $primary2
 
     }
+    .row ,.type{
+        width:100%;
+        @include center;
+        font-size:$s2;
+        font-weight: 400;
+        color:$gray2;
+        height:4rem;
+        border:1px dotted $primary2
+    }
+
+    
+   
 
     .row2{
         display: flex;

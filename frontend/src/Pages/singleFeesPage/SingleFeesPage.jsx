@@ -1,5 +1,5 @@
 import React from 'react';
-import { json, useLoaderData, useParams } from 'react-router-dom';
+import { json, useLoaderData, useLocation, useParams } from 'react-router-dom';
 import './SingleFeesPage.scss';
 import DetailCard from '../../components/DetailCard/DetailCard';
 import UserDetailCard from '../../components/UserDetailCard/UserDetailCard';
@@ -13,6 +13,8 @@ const keyCreator = (field , label)=>{
 
 const keys = [
   keyCreator('student_id','Student ID : '),
+  keyCreator('amount','Total Pending Amount : '),
+  keyCreator('email' , 'Email ID : '),
   keyCreator('phone','Student Phone No : '),
   keyCreator('parent_phone',"Parent's Phone : "),
 ];
@@ -21,7 +23,7 @@ const keys = [
 
 //Keys and Values for the Fees Detail Card
 const feesKeys = [
-    keyCreator('student_id','Student ID'),
+    // keyCreator('student_id','Student ID'),
     keyCreator('raw_amount','Raw Amount'),
     keyCreator('fine','Fine'),
     keyCreator('request_date','Demand Time and Date'),
@@ -52,13 +54,21 @@ const feesValues = {
 
 const SingleFees = (props) => {
     const params = useParams();
+    const location = useLocation();
+    const {amount} = location.state;
+    
+
+    // console.log("This is the amount received  : "+amount);
+
     const studentData = useLoaderData().Result;
+    //Data of the latest semester of this student.
     const latestData = studentData[0];
 
-    const tags = [
-        'A701',
-        '3rd Year'
+    const studentTags = [
+        latestData.flat_id,
+        Math.floor(latestData.student_id/100000),
     ];
+
 
 
 
@@ -71,7 +81,7 @@ const SingleFees = (props) => {
             <div className="middle">
                 <div className="container">
                     <div className="cardTitle">Student Details : </div>
-                    <UserDetailCard title={latestData.name} keys={keys} values={latestData} tags={tags}></UserDetailCard>
+                    <UserDetailCard title={latestData.name} keys={keys} values={{...latestData , amount : amount}} tags={studentTags}></UserDetailCard>
                 </div>
 
             </div>

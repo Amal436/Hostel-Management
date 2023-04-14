@@ -51,6 +51,13 @@ const DemandFeesForm = () => {
         setFormState((prev) => { return { ...prev, [e.target.name]: e.target.value } });
 
     }
+    const handleBatchChange = (event , newValue)=>{
+        setFormState((prev)=>{return {...prev , batch:newValue}});
+    }
+
+    const handleAlertFrequencyChange = (event , newValue)=>{
+        setFormState((prev)=>{return {...prev , alertFrequency:newValue}});
+    }
 
     const demandFeesHandler = async (event) => {
 
@@ -79,6 +86,7 @@ const DemandFeesForm = () => {
 
         } catch (error) {
 
+            window.alert('Could not demand fees');
             console.log(error.message);
 
 
@@ -98,7 +106,7 @@ const DemandFeesForm = () => {
             <div className="row1">
                     {/* <label htmlFor="batch">Batch : </label> */}
                     {/* <input type="text" className="batch input" name='batch' onChange={handleChange} /> */}
-                    <UnstyledSelect options={batchOptions}></UnstyledSelect>
+                    <UnstyledSelect onChange={handleBatchChange} options={batchOptions}></UnstyledSelect>
                 {/* <span className="semester">Semester 5</span> */}
 
             </div>
@@ -120,7 +128,7 @@ const DemandFeesForm = () => {
             <div className="control">
                 <label htmlFor="alertFrequency" className="alert">Alert Frequency : </label>
                 {/* <input type="text" className="input alertFrequency" id='alertFrequency' name='alert_frequency' onChange={handleChange} /> */}
-                <UnstyledSelect options={alertFrequencyOptions}></UnstyledSelect>
+                <UnstyledSelect options={alertFrequencyOptions} onChange={handleAlertFrequencyChange}></UnstyledSelect>
             </div>
 
             </div>

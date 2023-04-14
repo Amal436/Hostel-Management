@@ -1,5 +1,6 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
+import {json, useLoaderData, useParams} from 'react-router-dom';
+
 
 import './SingleComplaint.scss';
 import DetailCard from '../../components/DetailCard/DetailCard';
@@ -18,12 +19,9 @@ const keys = [
   keyCreator('student_id','Student ID : '),
   keyCreator('phone','Student Phone No : '),
   keyCreator('parent_phone',"Parent's Phone : "),
+  keyCreator('email',"Email : "),
 ];
 
-const tags = [
-  'A701',
-  '3rd Year'
-];
 
 const values = {
   student_id:202052026,
@@ -32,24 +30,18 @@ const values = {
 }
 
 const assigneeKeys = [
-    keyCreator('id','Worker ID : '),
+    keyCreator('w_id','Worker ID : '),
     keyCreator('agency','Agency : '),
-    keyCreator('phone' , 'Contact No.'),
+    keyCreator('w_phone' , 'Contact No.'),
 ];
-
-const assigneeValues = {
-    id:123,
-    phone:'7869421347',
-    agency:'Kazukame Defence Group'
-}
 
 const assigneeTags = ['Electrical'];
 
 const complaintKeys = [
     keyCreator('type','Complaint Type'),
-    keyCreator('expected_resolve_date','Expected Resolution'),
-    keyCreator('assignee','Assignee'),
-    keyCreator('raisedBy','Raised By'),
+    keyCreator('expected_date','Expected Resolution'),
+    keyCreator('w_name','Assignee'),
+    keyCreator('raised_by','Raised By'),
     keyCreator('flat_id','Flat No.'),
     // keyCreator('payment_mode','Mode'),
     // keyCreator('transaction_id','Transaction ID'),
@@ -73,6 +65,9 @@ const complaintValues = {
 
 const SingleComplaint = () => {
     const params = useParams();
+    const [values] = useLoaderData().Result;
+    const studentTags = [values.flat_id , Math.floor(values.student_id/100000)];
+    const workerTags = [values.job];
   return (
     <div className='singleComplaint'>
         <div className="top">Complaint {`>`} # {params.complaintId} </div>
@@ -82,8 +77,8 @@ const SingleComplaint = () => {
         <DetailCard
         title={params.complaintId}
         keys={complaintKeys}
-        values={complaintValues}
-        description={'Mera laptop bigud gaya'}
+        values={values}
+        description={values.description}
         />
         </div>
 
@@ -91,19 +86,19 @@ const SingleComplaint = () => {
 
             <div className="bottomLeft">
                 <div className="cardTitle">Student : </div>
-                <UserDetailCard title={'Chodu Bhagat'} 
+                <UserDetailCard title={values.raised_by} 
                 keys={keys} 
                 values={values} 
-                tags={tags}/>
+                tags={studentTags}/>
             </div>
 
             <div className="bottomRight">
                 <div className="cardTitle">Assignee : </div>
                 <UserDetailCard
-                 title={'Ramu Kaka'}
+                 title={values.w_name}
                  keys={assigneeKeys}
-                 values={assigneeValues}
-                 tags={assigneeTags}
+                 values={values}
+                 tags={workerTags}
                  ></UserDetailCard>
             </div>
         </div>
@@ -112,3 +107,24 @@ const SingleComplaint = () => {
 }
 
 export default SingleComplaint;
+
+export const SingleComplaintLoader = async ({params , request})=>{
+
+    const url = "http://localhost:4000/api/v1/complaints/complaint";
+    const option = {
+      method : 'POST',
+      body : JSON.stringify({id:params.complaintId}),
+      headers : {
+        'Content-Type'  : 'application/json',
+      }
+    };
+
+    const response = await fetch(url , option);
+
+    if(!response.ok)
+    {
+      throw json({'message':'Could not fetch single complaint'} , {status : 501});
+    }
+    return response;
+
+}

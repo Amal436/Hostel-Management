@@ -1,0 +1,39 @@
+@import '../../../styles/var.scss';
+
+.progressCard{
+    @include center;
+    height:20rem;
+    width:20rem;
+    border-radius:1rem;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    filter: drop-shadow(1px 1px 16px rgba(33, 33, 33, 0.23));
+
+    .progress{
+        filter: drop-shadow(1px 1px 16px rgba(33, 33, 33, 0.23));
+    }
+
+    .batch{
+        position:absolute;
+        top:1rem;
+        left:1rem;
+        font-size:$s2;
+        font-weight: $w6;
+    }
+    .stats{
+        position:absolute;
+        @include center;
+        flex-direction: column;
+
+        font-size:$s1;
+        font-weight: $w4;
+        // color: $gray2;
+
+        .percent{
+            font-weight: $w6;
+            font-size:$s2;
+            color:$primary4;
+        }
+    }
+    
+}

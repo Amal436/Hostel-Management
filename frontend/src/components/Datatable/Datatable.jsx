@@ -7,7 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 
 
-  const Datatable = ({rows , columns})=>{
+  const Datatable = ({rows , columns , onStateChange})=>{
     return <div className="datatable">
          <DataGrid
         rows={rows}
@@ -16,6 +16,8 @@ import { DataGrid } from '@mui/x-data-grid';
         rowsPerPageOptions={[100]}
         checkboxSelection
         className="datagrid"
+        onStateChange={onStateChange}
+        
 
       />
     </div>

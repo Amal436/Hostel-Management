@@ -47,7 +47,7 @@ let columns = [
     width:100,
     renderCell:(params)=>{
         return <div className="cellAction">
-            <Link className='link' to={`/fees/${params.row.student_id}`}>
+            <Link className='link' to={`/fees/${params.row.student_id}`}   state={{amount:params.row.total_pending_amount}} >
             <div className="viewButton"> View  </div>
             </Link>
             {/* <div className="deleteButton">Delete</div> */}
