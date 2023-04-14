@@ -30,10 +30,10 @@ exports.createComplaint = catchAsyncError(async (req, res, next) => {
 
 exports.getAllComplaints = catchAsyncError(async (req, res, next) => {
     const { date } = req.body;
-    const queryStr = `select complaint.id,complaint.type,complaint.status, student.name as raised_by, worker.name as assignee,student.flat_id
+    const queryStr = `select complaint.id,complaint.type,complaint.status,complaint.issue_date as raised_date, student.name as raised_by, worker.name as assignee,student.flat_id
     from complaint
     join student on complaint.raised_by = student.student_id and complaint.issue_date >= '${date}'
-    join worker on complaint.worker_id = worker.id`;
+    left outer join worker on complaint.worker_id = worker.id`;
 
     client.query(queryStr, (err, result) => {
         if (err) {
@@ -135,6 +135,74 @@ exports.countComplaints = catchAsyncError(async (req, res, next) => {
             success: true,
             Result
         })
+    })
+})
+
+//update lift status
+
+exports.updateLiftStatus = catchAsyncError(async (req, res, next) => {
+    const { block, status } = req.body;
+    const queryStr = `update lift_status set status = '${status}' where block = '${block}'`;
+
+    client.query(queryStr, (err, result) => {
+        if (err) return next(new ErrorHandler("something went wrong while updating lift status", 500));
+        res.status(200).json({
+            success: true,
+            message: "lift status updated successfully"
+        })
+    })
+})
+
+// get all lift status
+
+exports.getAllLiftStatus = catchAsyncError(async (req, res, next) => {
+    const queryStr = `select * from lift_status order by block`;
+    client.query(queryStr, (err, result) => {
+        if (err) return next(new ErrorHandler("something went wrong while getting all lift status", 500));
+        res.status(200).json({
+            success: true,
+            data: result.rows
+        })
+    })
+})
+
+// Assign worker for same type of complaints
+
+exports.assignWorker = catchAsyncError(async (req, res, next) => {
+    const { idList, worker_id } = req.body;
+    const queryStr1 = `SELECT COUNT(DISTINCT type) = 1 AS same
+                       FROM complaint
+                       WHERE id IN (${idList})`;
+    client.query(queryStr1, (err, result) => {
+        if (err) return next(new ErrorHandler("something went wrong while assigning worker", 401));
+
+        if (!result.rows[0].same) return next(new ErrorHandler("all complaints should be of same type", 500));
+
+        const queryStr2 = `select type from complaint where id = ${idList[0]}`;
+        client.query(queryStr2, (err, result) => {
+            if (err) return next(new ErrorHandler("something went wrong while selecting complaint type", 500));
+            const c_type = result.rows[0].type;
+
+            const queryStr3 = `select job from worker where id = ${worker_id}`;
+            client.query(queryStr3, (err, result) => {
+                if (err) return next(new ErrorHandler("something went wrong while selecting job", 500));
+                const job = result.rows[0].job;
+                if (job !== c_type) return next(new ErrorHandler("can't assign worker", 500));
+
+                const queryStr4 = `UPDATE complaint
+                                   SET worker_id = ${worker_id}
+                                   WHERE id IN (${idList}) AND status = 'pending'`;
+                client.query(queryStr4,(err,result)=>{
+                    if(err) next(new ErrorHandler("something went wrong while updating worker id",401));
+                    res.status(200).json({
+                       success:true,
+                       message:"worker assigned successfully"
+                    })
+                })
+            })
+
+        })
+
     })
 })
 
