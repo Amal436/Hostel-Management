@@ -13,7 +13,7 @@ const ComplaintStatus = ({width , complaintData}) => {
             return <div className="bar">
             <ComplaintBar
             width={width}
-            solved={complaintData[key].solved} 
+            solved={complaintData[key].resolved} 
             pending={complaintData[key].pending}
             />
             <div className="label">{complaintData[key].name}</div>

@@ -42,7 +42,7 @@ const BatchBlockData = {
     2020: { paid: 200, pending: 50 },
     2021: { paid: 150, pending: 100 },
     2022: { paid: 170, pending: 80 },
-    2024 :{paid : 100 , pending : 200}
+    2024 : { paid : 100 , pending : 200}
   };
 
   const feesKeys = Object.keys(feesData);
@@ -71,7 +71,7 @@ const BatchBlockData = {
 
           <div className="right">
             <div className="total">Total Complaints : </div>
-            <PieChart></PieChart>
+            <PieChart complaintData={complaintData}></PieChart>
 
             <div className="legend">
               <div className="legend-row row-1">

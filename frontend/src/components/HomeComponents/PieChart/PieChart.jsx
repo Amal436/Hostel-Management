@@ -3,22 +3,20 @@ import { PieChart } from 'react-minimal-pie-chart';
 
 import './PieChart.scss';
 
-const Pie = () => {
+const Pie = ({complaintData}) => {
 
-    const complaintData = {
-        electrical : {name : 'Electical' , solved  : 15 , pending : 25},
-        plumbing : {name : 'Plumbing ' , solved  : 10 , pending : 15},
-        carpenter : {name : 'Carpenter' , solved  : 20 , pending : 15},
-        housekeeping : {name : 'HouseKeeping' , solved : 25 , pending : 10}
-        
-    };
+    
     let totalPending = 0;
     let totalSolved = 0;
     for(const key of Object.keys(complaintData))
     {
         totalPending = totalPending + complaintData[key].pending;
-        totalSolved = totalSolved + complaintData[key].solved;
+        totalSolved = totalSolved + complaintData[key].resolved;
     }
+    
+    console.log(complaintData)
+    console.log(totalPending);
+    console.log(totalSolved)
 
   return (
     <PieChart
