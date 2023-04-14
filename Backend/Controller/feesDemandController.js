@@ -167,7 +167,7 @@ exports.countFeesStatusByBatches = catchAsyncError(async (req, res, next) => {
         result.rows.map((row) => {
             const { batch, status, count } = row;
             if (!data[batch]) data[batch] = {};
-            data[batch][status] = count;
+            data[batch][status] = Number(count);
         })
 
         const Result = {};
