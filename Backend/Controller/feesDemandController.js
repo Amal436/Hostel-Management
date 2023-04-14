@@ -160,14 +160,36 @@ exports.countFeesStatusByBatches = catchAsyncError(async (req, res, next) => {
     and fees_demand.semester = student.semester
     group by batch,status`;
 
-    const Result = {};
+    const data = {};
 
     client.query(queryStr, (err, result) => {
         if (err) return next(new ErrorHandler("something went wrong while counting students by their fees status", 400));
         result.rows.map((row) => {
             const { batch, status, count } = row;
-            if (!Result[batch]) Result[batch] = {};
-            Result[batch][status] = count;
+            if (!data[batch]) data[batch] = {};
+            data[batch][status] = count;
+        })
+
+        const Result = {};
+
+        Object.keys(data).map((batch) => {
+
+            // console.log(data[batch]);
+            if (data[batch]['pending']) {
+                if (!Result[batch]) Result[batch] = {};
+                Result[batch]['pending'] = data[batch]['pending'];
+            } else {
+                if (!Result[batch]) Result[batch] = {};
+                Result[batch]['pending'] = 0;
+            }
+
+            if (data[batch]['paid']) {
+                if (!Result[batch]) Result[batch] = {};
+                Result[batch]['paid'] = data[batch]['paid'];
+            } else {
+                if (!Result[batch]) Result[batch] = {};
+                Result[batch]['paid'] = 0;
+            }
         })
 
         res.status(200).json({
