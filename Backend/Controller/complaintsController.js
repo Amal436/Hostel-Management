@@ -29,8 +29,8 @@ exports.createComplaint = catchAsyncError(async (req, res, next) => {
 // get all complaint after a date
 
 exports.getAllComplaints = catchAsyncError(async (req, res, next) => {
-    if(!req.body.date){
-        return next(new ErrorHandler("parameter is not named correctly",400));
+    if (!req.body.date) {
+        return next(new ErrorHandler("parameter is not named correctly", 400));
     }
     const { date } = req.body;
     const queryStr = `select complaint.id,complaint.type,complaint.status,complaint.issue_date as raised_date, student.name as raised_by, worker.name as assignee,student.flat_id
@@ -56,7 +56,7 @@ exports.getSingleComplaint = catchAsyncError(async (req, res, next) => {
     const queryStr = `select complaint.id as c_id,complaint.type,complaint.subtype,complaint.description,complaint.status,student.student_id,student.name as raised_by,student.semester,student.phone,student.email,student.flat_id,student.parent_phone,complaint.issue_date,complaint.issue_time,complaint.expected_date,complaint.resolved_date,complaint.resolved_time,worker.id as w_id,worker.name as w_name,worker.agency,worker.job,worker.phone as w_phone,worker.visiting_frequency
     from complaint
     join student on complaint.raised_by = student.student_id and complaint.id = ${id}
-    join worker on complaint.worker_id = worker.id`;
+    left outer join worker on complaint.worker_id = worker.id`;
 
     client.query(queryStr, (err, result) => {
         if (err) {
@@ -195,11 +195,11 @@ exports.assignWorker = catchAsyncError(async (req, res, next) => {
                 const queryStr4 = `UPDATE complaint
                                    SET worker_id = ${worker_id}
                                    WHERE id IN (${idList}) AND status = 'pending'`;
-                client.query(queryStr4,(err,result)=>{
-                    if(err) next(new ErrorHandler("something went wrong while updating worker id",401));
+                client.query(queryStr4, (err, result) => {
+                    if (err) next(new ErrorHandler("something went wrong while updating worker id", 401));
                     res.status(200).json({
-                       success:true,
-                       message:"worker assigned successfully"
+                        success: true,
+                        message: "worker assigned successfully"
                     })
                 })
             })
