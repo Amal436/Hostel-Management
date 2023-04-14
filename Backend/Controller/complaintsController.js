@@ -118,22 +118,22 @@ exports.countComplaints = catchAsyncError(async (req, res, next) => {
         }
         const Result = {
             electrical: {
-                name: 'electrical',
+                name: 'Electrical',
                 pending: cnt_ep,
                 resolved: cnt_er
             },
             plumbing: {
-                name: 'plumbing',
+                name: 'Plumbing',
                 pending: cnt_pp,
                 resolved: cnt_pr
             },
             house_keeping: {
-                name: 'house_keeping',
+                name: 'House keeping',
                 pending: cnt_hp,
                 resolved: cnt_hr
             },
             carpenter: {
-                name: 'carpenter',
+                name: 'Carpenter',
                 pending: cnt_cp,
                 resolved: cnt_cr
             }
