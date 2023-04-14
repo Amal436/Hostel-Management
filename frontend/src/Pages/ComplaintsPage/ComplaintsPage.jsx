@@ -103,7 +103,7 @@ const ComplaintsPage = () => {
     setSearchText(event.target.value);
     const text = event.target.value;//Because the state variable wont be instantly updated
     clearTimeout(searchTimeOutState);
-
+    console.log(complaintsData);
     const searchTimeOut = setTimeout(() => {
       const results = complaintsData.filter((complaintEntry) => {
         return ((!filters.type || complaintEntry.type===filters.type)
@@ -111,7 +111,7 @@ const ComplaintsPage = () => {
         &&(!filters.block || complaintEntry.flat_id.charAt(0)===filters.block))
 
         && (complaintEntry.raised_by.toLowerCase().includes(text.toLowerCase()) 
-        || complaintEntry.assignee.toLowerCase().includes(text.toLowerCase()) 
+        || (complaintEntry.assignee && complaintEntry.assignee.toLowerCase().includes(text.toLowerCase())) 
         || complaintEntry.status.toLowerCase().includes(text.toLowerCase()) 
         || complaintEntry.flat_id.toLowerCase().includes(text.toLowerCase()) 
         || complaintEntry.type.toLowerCase().includes(text.toLowerCase()) 

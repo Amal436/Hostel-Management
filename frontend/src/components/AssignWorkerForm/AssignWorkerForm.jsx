@@ -9,10 +9,10 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const workers = {
 
-    electrical :      [ {value : 1 , name : 'Ramesh'},{value : 2 , name :'Lokesh'}],
-    house_keeping :   [{value : 3 , name : 'Kshitij'}, {value : 4 , name : 'Amal'}],
-    plumbing :        [{value : 5 , name : 'Tillu'}, {value : 6 , name : 'Gillu'}],
-    carpenter :       [{value : 7 , name : 'Santosh'},{value : 8 , name : 'Chintu'}],
+    electrical :      [ {value : 2 , name : 'Ramesh'},{value : 5 , name :'Lokesh'}],
+    house_keeping :   [{value : 4 , name : 'Kshitij'}, {value : 6 , name : 'Jaydeep Bhai'}],
+    plumbing :        [{value : 3 , name : 'Johny'}],
+    carpenter :       [{value : 1 , name : 'Santosh'}],
 };
 
 const AssignWorkerForm = () => {
@@ -49,29 +49,34 @@ const AssignWorkerForm = () => {
 
         try {
 
-            // const response = await fetch('http://localhost:4000/api/v1/fees/addFine', {
-            //     method: 'POST',
-            //     body: JSON.stringify(formState),
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     }
+            const response = await fetch('http://localhost:4000/api/v1/complaints/assign', {
+                method: 'POST',
+                body: JSON.stringify({
+                    idList : complaintIdList,
+                    worker_id : selectedWorker,
 
-            // });
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
 
-            // if (!response.ok) {
-            //     throw new Error('Something went wrong ! ');
-            // }
+            });
 
-            // const data = await response.json();
-            // window.alert('Fine added successfully !');
-            // console.log("Fine added successfully ! ");
+            if (!response.ok) {
+                throw new Error('Something went wrong ! ');
+            }
+
+            const data = await response.json();
+            window.alert('Worker assigned successfully !');
+            console.log("Fine added successfully ! ");
+            window.location.reload();
 
 
 
         } catch (error) {
-
+            window.alert('Afsoos ! Nahi ho paya');
             console.log(error.message);
-
+          
 
         }
 

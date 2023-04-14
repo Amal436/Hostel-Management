@@ -94,12 +94,12 @@ const SingleComplaint = () => {
 
             <div className="bottomRight">
                 <div className="cardTitle">Assignee : </div>
-                <UserDetailCard
+                {values.w_name && <UserDetailCard
                  title={values.w_name}
                  keys={assigneeKeys}
                  values={values}
                  tags={workerTags}
-                 ></UserDetailCard>
+                 />}
             </div>
         </div>
     </div>

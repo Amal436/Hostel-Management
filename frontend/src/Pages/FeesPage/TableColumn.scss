@@ -15,6 +15,13 @@
     color:rgb(1, 61, 47);
     font-weight: $w6 !important;
 }
+.paid{
+
+    background-color: rgba(0, 224, 183, 0.419);
+    color:rgba(1, 61, 47, 0.704);
+    font-weight: $w6 !important;
+
+}
 .cellAction{
     display:flex;
     align-items: center;//vertically align the buttons

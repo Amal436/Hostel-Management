@@ -17,6 +17,7 @@
     flex:1;
     border-radius: 2rem;
    flex-direction: column;
+   background-color: rgb(255, 255, 255);
    gap:0.3rem;
 
    .sectionLabel{
@@ -39,9 +40,10 @@
     flex-direction: column;
     gap:0;
     height:30%;
-    box-shadow: inset 1px 1px 16px rgba(33, 33, 33, 0.23);
+    // box-shadow: inset 1px 1px 16px rgba(33, 33, 33, 0.23);
+    box-shadow: 2px 2px 10px 1px rgba(18, 34, 29, 0.15);
     border-radius: 20px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     
 
     .sectionLabel{
@@ -136,12 +138,13 @@
     gap:2rem;
     .hostelLeft{
         flex  : 1;
-        background-color: white;
+        background-color: rgb(255, 255, 255);
     }
     .hostelRight{
         flex:2;
         @include center;
-        box-shadow: inset 1px 1px 16px rgba(33, 33, 33, 0.23);
+        // box-shadow: inset 1px 1px 16px rgba(33, 33, 33, 0.23);
+        box-shadow: 2px 2px 10px 1px rgba(18, 34, 29, 0.15);
         border-radius: 1rem;;
         background-color: white;
     }

@@ -5,18 +5,23 @@ import PieChart from '../../components/HomeComponents/PieChart/PieChart';
 import ProgressChart from '../../components/HomeComponents/ProgressChart/ProgressChart';
 import ElevatorStatus from '../../components/HomeComponents/ElevatorStatus/ElevatorStatus';
 import BBD from '../../components/HomeComponents/BlockBatchDistribution/BlockBatchDistribution';
+import { json, useLoaderData } from 'react-router-dom';
 
 
 
 const HomePage = () => {
 
-  const complaintData = {
-    electrical : {name : 'Electical' , solved  : 15 , pending : 25},
-    plumbing : {name : 'Plumbing ' , solved  : 10 , pending : 15},
-    carpenter : {name : 'Carpenter' , solved  : 20 , pending : 15},
-    housekeeping : {name : 'HouseKeeping' , solved : 25 , pending : 10}
+//   const complaintData = {
+//     electrical : {name : 'Electical' , solved  : 15 , pending : 25},
+//     plumbing : {name : 'Plumbing ' , solved  : 10 , pending : 15},
+//     carpenter : {name : 'Carpenter' , solved  : 20 , pending : 15},
+//     housekeeping : {name : 'HouseKeeping' , solved : 25 , pending : 10}
     
-};
+// };
+const complaintData = useLoaderData().Result;
+console.log(complaintData)
+
+
 
 const BatchBlockData = {
   A: {name : 'A Block' , first  : 15 , second : 25 , third : 8 , fourth : 0},
@@ -109,4 +114,19 @@ const BatchBlockData = {
   )
 }
 
-export default HomePage
+export default HomePage;
+
+export const homePageLoader = async ({request , params})=>{
+
+  const url = "http://localhost:4000/api/v1/complaints/count";
+  const response =  await fetch(url);
+  if(!response.ok)
+  {
+    return json({message : 'Could not fetch complaints stats'},{status : 401});
+  }
+  else
+  {
+    return response;
+  }
+
+}

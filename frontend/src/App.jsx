@@ -9,12 +9,13 @@ import SingleComplaint from './Pages/SingleComplaintPage/SingleComplaint';
 import { SingleFeesLoader } from './Pages/singleFeesPage/SingleFeesPage';
 import { SingleComplaintLoader } from './Pages/SingleComplaintPage/SingleComplaint';
 import SingleFees from './Pages/singleFeesPage/SingleFeesPage';
+import { homePageLoader } from './Pages/HomePage/HomePage';
 
 const router = createBrowserRouter([
   {
     path: '/', element: <RootLayout />, errorElement: <div>Something went wrong</div>, children: [
 
-      { path: '/', element: <HomePage />, },
+      { path: '/', element: <HomePage />,loader : homePageLoader },
 
       { path: '/complaints' ,children:[
         { path:'/complaints' , element:<ComplaintsPage/> },
