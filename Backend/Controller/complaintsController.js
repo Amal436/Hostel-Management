@@ -213,3 +213,19 @@ exports.assignWorker = catchAsyncError(async (req, res, next) => {
     })
 })
 
+
+// Find workers by job
+
+exports.findWorkers = catchAsyncError(async (req,res,next)=>{
+    const {job} = req.body;
+    const queryStr = `select * from worker where job = '${job}'`;
+
+    client.query(queryStr,(err,result)=>{
+        if(err) return next(new ErrorHandler("something went wrong while finding workers",401));
+
+        res.status(200).json({
+            success:true,
+            Result: result.rows
+        })
+    })
+})

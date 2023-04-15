@@ -41,16 +41,22 @@ exports.getStudentCountBatchWiseInEachBlock = catchAsyncError(async (req, res, n
                       student_id/100000 AS batch, 
                       COUNT(*) AS count 
                       FROM student 
-                      GROUP BY block, batch`;
+                      GROUP BY block, batch order by batch`;
 
     const data = {};
 
     client.query(queryStr, (err, result) => {
         if (err) return next(new ErrorHandler("something went wrong while fetching data", 401));
-        result.rows.map((row) => {
+        result.rows.map((row, index) => {
+            let year = "";
+            if (index === 0) year = "first";
+            else if (index === 1) year = "second";
+            else if (index === 2) year = "third";
+            else year = "fourth";
             const { block, batch, count } = row;
             if (!data[block]) data[block] = {};
-            data[block][batch] = count;
+            data[block]['name'] = block + ' block';
+            data[block][year] = Number(count);
         })
 
         res.status(200).json({

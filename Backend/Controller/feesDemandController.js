@@ -1,6 +1,7 @@
 const client = require("../db/database");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utils/ErrorHandler");
+const sendMail = require("../utils/sendMail");
 
 // Creating Demand for all the students of a batch
 
@@ -196,5 +197,42 @@ exports.countFeesStatusByBatches = catchAsyncError(async (req, res, next) => {
             success: true,
             Result
         })
+    })
+})
+
+
+// Sending Reminder to the students whose fees is pending
+
+exports.sendReminder = catchAsyncError(async (req, res, next) => {
+    const { batch } = req.body;
+    const queryStr = `select student.email from student 
+                      join fees_demand on student.student_id = fees_demand.student_id 
+                      and student.student_id/100000=${batch} 
+                      and fees_demand.status = 'pending';`
+
+    client.query(queryStr, (err, result) => {
+        if (err) return next(new ErrorHandler("something went wrong while sending reminder", 401));
+
+        result.rows.map(async (row) => {
+            const { email } = row;
+
+            const message = `This is to inform 2020 batch, those who have not paid fees yet kindly pay it by 20th april`;
+
+            try {
+                await sendMail({
+                    email: email,
+                    subject: `A Gentle Reminder`,
+                    message
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        })
+
+        res.status(200).json({
+            success: true,
+            message: "mail send successfully",
+        })
+
     })
 })
