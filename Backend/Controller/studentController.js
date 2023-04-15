@@ -54,17 +54,17 @@ exports.getStudentCountBatchWiseInEachBlock = catchAsyncError(async (req, res, n
             else if (index === 2) year = "third";
             else year = "fourth";
             const { block, count } = row;
-            if (!data[block]) data[block] = {};
-            data[block]['name'] = block + ' block';
-            data[block][year] = Number(count);
+            if (!Result[block]) Result[block] = {};
+            Result[block]['name'] = block + ' block';
+            Result[block][year] = Number(count);
         })
 
-        Object.keys(data).map((block) => {
-            if (!data[block]) data[block] = {};
-            if (!data[block]['first']) data[block]['first'] = 0;
-            if (!data[block]['second']) data[block]['second'] = 0;
-            if (!data[block]['third']) data[block]['third'] = 0;
-            if (!data[block]['fourth']) data[block]['fourth'] = 0;
+        Object.keys(Result).map((block) => {
+            if (!Result[block]) Result[block] = {};
+            if (!Result[block]['first']) Result[block]['first'] = 0;
+            if (!Result[block]['second']) Result[block]['second'] = 0;
+            if (!Result[block]['third']) Result[block]['third'] = 0;
+            if (!Result[block]['fourth']) Result[block]['fourth'] = 0;
         })
 
         res.status(200).json({
