@@ -213,7 +213,6 @@ exports.assignWorker = catchAsyncError(async (req, res, next) => {
     })
 })
 
-
 // Find workers by job
 
 exports.findWorkers = catchAsyncError(async (req,res,next)=>{
